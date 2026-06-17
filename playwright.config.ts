@@ -83,6 +83,9 @@ export default defineConfig({
     navigationTimeout: 30_000,
   },
 
+  // The default headless `chromium` project runs everywhere (incl. CI). The
+  // headed real-Chrome project is a LOCAL observation aid and is excluded on CI:
+  // a CI runner has no display, so a headed browser cannot launch there.
   projects: [
     {
       name: 'chromium',
@@ -91,21 +94,25 @@ export default defineConfig({
         headless: true,
       },
     },
-    {
-      // Real Google Chrome (stable channel) instead of bundled chromium.
-      // Run with: npm run test:chrome   (opens a visible Chrome window)
-      name: 'chrome',
-      use: {
-        ...devices['Desktop Chrome'],
-        channel: 'chrome',
-        headless: false,
-        // slowMo adds a 1000 pause between each Playwright action so the run is
-        // easy to follow by eye. This is a browser-level observation aid, NOT a
-        // hard wait in test code — specs remain network-first.
-        launchOptions: {
-          slowMo: 1000,
-        },
-      },
-    },
+    // Local-only: real Google Chrome (stable channel), headed, with slowMo.
+    ...(isCI
+      ? []
+      : [
+          {
+            // Run with: npm run test:chrome   (opens a visible Chrome window)
+            name: 'chrome',
+            use: {
+              ...devices['Desktop Chrome'],
+              channel: 'chrome',
+              headless: false,
+              // slowMo adds a 1000ms pause between each Playwright action so the
+              // run is easy to follow by eye. This is a browser-level observation
+              // aid, NOT a hard wait in test code — specs remain network-first.
+              launchOptions: {
+                slowMo: 1000,
+              },
+            },
+          },
+        ]),
   ],
 });
