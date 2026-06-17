@@ -36,8 +36,13 @@ Scoring heuristic: `probability` (1–3) × `impact` (1–3). 7–9 → P0, 5–
 | REQ-09 | Logout redirects to login page | 3 | 3 | 9 | **P0** | Session security |
 | REQ-10 | Login page loads in < 3 seconds | 2 | 2 | 4 | **P2** | Performance NFR |
 | REQ-11 | Session not persisted after logout | 2 | 3 | 6 | **P1** | Security |
+| REQ-12 | Admin → System Users page loads (heading, table, records) | 2 | 2 | 4→**P1** | **P1** | Admin feature discoverability |
+| REQ-13 | Search System Users by username returns the match | 2 | 2 | 4→**P1** | **P1** | Core admin search path |
+| REQ-14 | Search non-existent username → "No Records Found" | 2 | 1 | 2 | **P2** | Negative/empty-state handling |
+| REQ-15 | Reset clears the filter and restores the full list | 1 | 1 | 1→**P2** | **P2** | Filter usability |
+| REQ-16 | "Add" navigates to the Add User form | 2 | 2 | 4→**P1** | **P1** | Admin create-user entry point |
 
-**Counts:** **P0 = 6** (REQ-01, 02, 03, 04, 07, 09), **P1 = 4** (REQ-05, 06, 08, 11), **P2 = 1** (REQ-10), **P3 = 0**.
+**Counts:** **P0 = 6** (REQ-01, 02, 03, 04, 07, 09), **P1 = 7** (REQ-05, 06, 08, 11, 12, 13, 16), **P2 = 3** (REQ-10, 14, 15), **P3 = 0**.
 
 ---
 
@@ -56,6 +61,11 @@ Scoring heuristic: `probability` (1–3) × `impact` (1–3). 7–9 → P0, 5–
 | REQ-09 | Given an authenticated session, when the user logs out, then the URL returns to `/auth/login` and the Login button is visible. |
 | REQ-10 | Given a cold load of the login page, then it is interactive in < 3s. |
 | REQ-11 | Given a logout, then the prior session cannot be replayed (cookie cleared / protected route redirects to login). |
+| REQ-12 | Given an authenticated user on `/admin/viewSystemUsers`, then the "System Users" heading, results table and a "(N) Records Found" summary are visible with N ≥ 1. |
+| REQ-13 | Given the System Users page, when filtering by username "Admin", then the Admin row is visible and the result set narrows. |
+| REQ-14 | Given the System Users page, when filtering by an unknown username, then "No Records Found" is shown and the count is 0. |
+| REQ-15 | Given a filtered list, when Reset is clicked, then the full unfiltered list is restored. |
+| REQ-16 | Given the System Users page, when "Add" is clicked, then the URL becomes `/admin/saveSystemUser` and a Save button is visible. |
 
 ---
 

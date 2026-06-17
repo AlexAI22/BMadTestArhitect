@@ -10,7 +10,7 @@ built by executing all **9 core workflows** of the BMad Method
 - **Pattern:** Page Object Model, isolated-context auth fixture, network-first synchronization
 - **Reference:** https://bmad-code-org.github.io/bmad-method-test-architecture-enterprise/
 
-**Latest run:** ✅ 9 passed · 3 skipped (ATDD red-phase) · 0 failed (chromium).
+**Latest run:** ✅ 14 passed · 3 skipped (ATDD red-phase) · 0 failed (chromium).
 
 ---
 
@@ -100,14 +100,17 @@ orangehrm-tea-demo/
 │   │   │   ├── login.spec.ts          # P0/P1 login coverage (Automate)
 │   │   │   ├── login-atdd.spec.ts     # ATDD red-phase scaffolds (skipped)
 │   │   │   └── logout.spec.ts         # P0 logout (uses auth fixture)
-│   │   └── dashboard/
-│   │       └── dashboard.spec.ts      # P0/P1 dashboard coverage
+│   │   ├── dashboard/
+│   │   │   └── dashboard.spec.ts      # P0/P1 dashboard coverage
+│   │   └── admin/
+│   │       └── admin.spec.ts          # P1/P2 System Users (search/reset/add)
 │   ├── fixtures/
 │   │   └── auth.fixture.ts            # isolated-context authenticatedPage fixture
 │   └── support/
 │       └── page-objects/
 │           ├── LoginPage.ts
-│           └── DashboardPage.ts
+│           ├── DashboardPage.ts
+│           └── AdminPage.ts
 ├── docs/                              # all TEA workflow artifacts (see map below)
 ├── .github/workflows/test.yml         # CI: test (2 shards) + burn-in + smoke
 ├── playwright.config.ts               # baseURL, chromium headless, traces, MCP note
@@ -129,7 +132,7 @@ orangehrm-tea-demo/
 | 3 | Test Design | TD | [docs/test-design-qa.md](./docs/test-design-qa.md) |
 | 4 | CI/CD Integration | CI | [.github/workflows/test.yml](./.github/workflows/test.yml) + `package.json` scripts |
 | 5 | ATDD | AT | [tests/e2e/auth/login-atdd.spec.ts](./tests/e2e/auth/login-atdd.spec.ts) + [docs/atdd-implementation-checklist.md](./docs/atdd-implementation-checklist.md) |
-| 6 | Automate | TA | [login.spec.ts](./tests/e2e/auth/login.spec.ts), [logout.spec.ts](./tests/e2e/auth/logout.spec.ts), [dashboard.spec.ts](./tests/e2e/dashboard/dashboard.spec.ts) |
+| 6 | Automate | TA | [login.spec.ts](./tests/e2e/auth/login.spec.ts), [logout.spec.ts](./tests/e2e/auth/logout.spec.ts), [dashboard.spec.ts](./tests/e2e/dashboard/dashboard.spec.ts), [admin.spec.ts](./tests/e2e/admin/admin.spec.ts) |
 | 7 | Test Review | RV | [docs/test-review-report.md](./docs/test-review-report.md) |
 | 8 | NFR Evidence Audit | NR | [docs/nfr-assessment.md](./docs/nfr-assessment.md) |
 | 9 | Requirements Tracing | TR | [docs/traceability-matrix.md](./docs/traceability-matrix.md) + [docs/gate-decision.md](./docs/gate-decision.md) |

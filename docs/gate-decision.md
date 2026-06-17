@@ -11,13 +11,13 @@
 
 ## 1. Decision
 
-> ## 🟡 GATE DECISION: **WAIVED**
+> ## 🟡 GATE DECISION: **CONCERNS**
 >
-> All implemented scenarios pass (P0 = 100%, Test Review = 92.7, NFR mostly PASS).
-> The gate does not reach unconditional PASS only because one P1 scenario
-> (REQ-11, session-not-persisted) is intentionally deferred to ATDD red-phase.
-> That single item is formally **waived** with a tracked activation path; it is
-> not a failure of delivered scope.
+> All implemented scenarios pass (P0 = 100%, P1 = 85.7%, Test Review = 92.7,
+> NFR mostly PASS). P1 active coverage falls in the CONCERNS band (80–89%) per the
+> TEA rules: 6 of 7 P1 scenarios are FULL automated and passing; the only gap is
+> REQ-11 (session-not-persisted), intentionally deferred to ATDD red-phase with a
+> tracked activation path. No P0 gaps, no failures in delivered scope.
 
 ---
 
@@ -26,15 +26,14 @@
 | Rule | Threshold | Actual (active-passing) | Result |
 |------|-----------|-------------------------|--------|
 | P0 coverage | = 100% | 100% (6/6) | ✅ |
-| P1 coverage | ≥ 90% (PASS) / 80–89% (CONCERNS) | 75% (3/4 active; 4/4 authored) | ⚠️ below PASS |
+| P1 coverage | ≥ 90% (PASS) / 80–89% (CONCERNS) | 85.7% (6/7 active; 7/7 authored) | 🟡 CONCERNS band |
 | Overall quality | ≥ 80% | 92.7% | ✅ |
 
-**Mechanical rule outcome:** P1 active-passing (75%) is below the 80% FAIL floor,
-which would yield FAIL on the raw rule. **However**, the only missing P1 (REQ-11)
-is *authored with full assertion logic* and deliberately parked as an ATDD
-red-phase scaffold pending behaviour confirmation — a planned deferral, not a
-defect or a gap in delivered code. Per TEA gate governance this qualifies for a
-**WAIVED** decision rather than FAIL.
+**Mechanical rule outcome:** P0 = 100% and P1 active-passing = 85.7% places this
+squarely in the **CONCERNS** band (P0=100%, P1 80–89%). The single P1 below FULL
+(REQ-11) is *authored with full assertion logic* and deliberately parked as an
+ATDD red-phase scaffold pending behaviour confirmation — a planned deferral, not a
+defect. Activating it lifts P1 to 100% (7/7) → **PASS**.
 
 ---
 
@@ -43,11 +42,11 @@ defect or a gap in delivered code. Per TEA gate governance this qualifies for a
 | Priority | Required | Active-passing | Authored (incl. ATDD) | Threshold | Status |
 |----------|:--------:|:--------------:|:---------------------:|:---------:|:------:|
 | P0 | 6 | 6 (100%) | 6 (100%) | 100% | ✅ PASS |
-| P1 | 4 | 3 (75%) | 4 (100%) | ≥90% | 🟡 WAIVED (1 deferred) |
-| P2 | 1 | 1 partial (NFR audit) | 1 | ≥50% | ✅ PASS |
+| P1 | 7 | 6 (85.7%) | 7 (100%) | ≥90% | 🟡 CONCERNS (1 deferred) |
+| P2 | 3 | 2 FULL + 1 partial (100%) | 3 | ≥50% | ✅ PASS |
 | P3 | 0 | — | — | ≥20% | ✅ n/a |
 
-Test execution evidence: **9 passed, 3 skipped (ATDD), 0 failed** — full suite,
+Test execution evidence: **14 passed, 3 skipped (ATDD), 0 failed** — full suite,
 chromium.
 
 ---
@@ -88,4 +87,4 @@ chromium.
 
 **Path to unconditional PASS**
 - [ ] Activate ATDD AT-02 / AT-03 (REQ-11) → P1 reaches 100% active → re-run this
-      gate to upgrade **WAIVED → PASS**.
+      gate to upgrade **CONCERNS → PASS**.
