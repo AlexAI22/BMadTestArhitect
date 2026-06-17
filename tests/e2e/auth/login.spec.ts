@@ -10,8 +10,8 @@ import { DashboardPage } from '../../support/page-objects/DashboardPage.js';
  * Each test is self-contained: it navigates to a fresh login page.
  */
 
-const ADMIN_USER = process.env.ADMIN_USER ?? 'Admin';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? 'admin123';
+const ADMIN_USER = process.env.ADMIN_USER || 'Admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
 test.describe('Login', () => {
   let loginPage: LoginPage;

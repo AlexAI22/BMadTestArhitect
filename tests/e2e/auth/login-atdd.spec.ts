@@ -16,8 +16,8 @@ import { LoginPage } from '../../support/page-objects/LoginPage.js';
  * locators, full assertion logic (no placeholders).
  */
 
-const ADMIN_USER = process.env.ADMIN_USER ?? 'Admin';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? 'admin123';
+const ADMIN_USER = process.env.ADMIN_USER || 'Admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
 test.describe('Login — ATDD (red phase)', () => {
   // ATDD: activate when feature is implemented

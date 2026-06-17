@@ -2,8 +2,10 @@ import { test as base, expect, type Page } from '@playwright/test';
 import { LoginPage } from '../support/page-objects/LoginPage.js';
 import { DashboardPage } from '../support/page-objects/DashboardPage.js';
 
-const ADMIN_USER = process.env.ADMIN_USER ?? 'Admin';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? 'admin123';
+// `||` (not `??`): unset CI secrets render as empty strings, so fall back to the
+// public demo credentials when the env var is empty.
+const ADMIN_USER = process.env.ADMIN_USER || 'Admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
 /**
  * Custom fixtures for the OrangeHRM TEA demo.

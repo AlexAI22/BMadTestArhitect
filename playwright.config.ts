@@ -36,8 +36,10 @@ dotenv.config();
  * ---------------------------------------------------------------------------
  */
 
+// Use `||` (not `??`) so an unset CI secret — which GitHub renders as an empty
+// string, not undefined — falls back to the public demo default.
 const BASE_URL =
-  process.env.BASE_URL ?? 'https://opensource-demo.orangehrmlive.com';
+  process.env.BASE_URL || 'https://opensource-demo.orangehrmlive.com';
 
 const isCI = !!process.env.CI;
 
