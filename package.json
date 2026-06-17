@@ -1,0 +1,37 @@
+{
+  "name": "orangehrm-tea-demo",
+  "version": "1.0.0",
+  "description": "Production-ready Playwright + TypeScript test automation demo for the OrangeHRM demo site, built following the BMad Method TEA (Test Engineering Architect) framework.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:burn-in": "playwright test --repeat-each=3 --retries=0",
+    "test:report": "playwright show-report",
+    "test:chrome": "playwright test --project=chrome",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "test-automation",
+    "tea",
+    "bmad",
+    "orangehrm",
+    "e2e",
+    "mcp"
+  ],
+  "author": "TEA Demo",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^20.17.0",
+    "dotenv": "^16.4.5",
+    "typescript": "^5.7.2"
+  }
+}
