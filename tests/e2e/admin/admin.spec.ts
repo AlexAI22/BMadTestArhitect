@@ -61,16 +61,17 @@ test.describe('Admin — System Users', () => {
   // P2 — Reset restores the full, unfiltered list.
   test('reset clears the filter and restores the full list', async () => {
     await admin.searchByUsername('Admin');
-    const filteredCount = await admin.getRecordsCount();
+    // Web-first: wait for the filtered state to settle (Admin → exactly 1 record)
+    // rather than reading a count mid-transition.
+    await expect(admin.usernameFilter).toHaveValue('Admin');
+    await expect(admin.recordsFound).toHaveText(/\(1\) Record Found/);
 
     await admin.resetFilters();
-    const resetCount = await admin.getRecordsCount();
-
-    expect(
-      resetCount,
-      'After reset the list should be at least as large as the filtered result',
-    ).toBeGreaterThanOrEqual(filteredCount);
+    // Reset clears the filter (race-free form-state change) and the list grows
+    // back beyond the single filtered row.
+    await expect(admin.usernameFilter).toHaveValue('');
     await expect(admin.recordsFound).toBeVisible();
+    await expect(admin.recordsFound).not.toHaveText(/\(1\) Record Found/);
   });
 
   // P1 — Navigation: "Add" opens the Add User form.
