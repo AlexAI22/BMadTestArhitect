@@ -11,7 +11,7 @@
     "test:smoke": "playwright test --grep @smoke",
     "test:burn-in": "playwright test --repeat-each=3 --retries=0",
     "test:report": "playwright show-report",
-    "test:chrome": "playwright test --project=chrome",
+    "test:chrome": "playwright test --project=chrome --workers=1",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "typecheck": "tsc --noEmit"
