@@ -137,6 +137,45 @@ orangehrm-tea-demo/
 | 8 | NFR Evidence Audit | NR | [docs/nfr-assessment.md](./docs/nfr-assessment.md) |
 | 9 | Requirements Tracing | TR | [docs/traceability-matrix.md](./docs/traceability-matrix.md) + [docs/gate-decision.md](./docs/gate-decision.md) |
 
+> The artifacts in `docs/` above were authored as a hand-built demonstration of
+> the TEA workflows. The repo **also** has the real BMAD TEA agent installed (see
+> next section), whose workflows regenerate equivalent artifacts under
+> `_bmad-output/test-artifacts/`.
+
+---
+
+## BMAD Test Architect agent (Murat)
+
+This project has the **BMad Method** installed with the **Test Architect (TEA)**
+module — so the 9 workflows can be driven by the AI agent, not just read as docs.
+
+- **Installed:** BMad Core v6.8.0 + Test Architect v1.19.0
+  (`npx bmad-method install --modules tea --tools claude-code`).
+- **Layout:** `_bmad/` (framework + `_bmad/tea/config.yaml`), `.claude/skills/`
+  (22 agent skills), `_bmad-output/test-artifacts/` (generated outputs, gitignored).
+- **The agent:** **Murat** — "Master Test Architect & Quality Advisor". Activate by
+  invoking the `bmad-tea` skill (or ask for "Murat" / "the Test Architect").
+- **Browser automation:** `tea_browser_automation: mcp` in `_bmad/tea/config.yaml`
+  (matches this project's MCP-driven design).
+
+### Workflow skills (BMAD trigger → Claude Code skill)
+
+| Workflow | Trigger | Skill |
+|----------|---------|-------|
+| Teach Me Testing | TMT | `bmad-teach-me-testing` |
+| Framework Setup | TF | `bmad-testarch-framework` |
+| Test Design | TD | `bmad-testarch-test-design` |
+| CI/CD Integration | CI | `bmad-testarch-ci` |
+| ATDD | AT | `bmad-testarch-atdd` |
+| Automate | TA | `bmad-testarch-automate` |
+| Test Review | RV | `bmad-testarch-test-review` |
+| NFR Evidence Audit | NR | `bmad-testarch-nfr` |
+| Requirements Tracing | TR | `bmad-testarch-trace` |
+
+> Optional: full agent activation runs a Python resolver
+> (`_bmad/scripts/resolve_customization.py`); without Python the skill falls back
+> to reading its `customize.toml` directly, so it still works.
+
 ---
 
 ## MCP server configuration

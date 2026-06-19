@@ -20,3 +20,6 @@ Thumbs.db
 .idea/
 .vscode/
 *.log
+
+# BMAD TEA generated output (the framework + config in _bmad/ stay tracked)
+/_bmad-output/
