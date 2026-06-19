@@ -190,14 +190,16 @@ the same specs deterministically.
 npx @playwright/mcp@latest --headless --browser chromium
 ```
 
-**Register with an MCP client** (`.mcp.json` / `claude_desktop_config.json`):
+**Register with an MCP client:** this repo ships a ready [.mcp.json](./.mcp.json) at
+the project root (Claude Code auto-loads it), registering the Playwright MCP server
+against **real Google Chrome**:
 
 ```json
 {
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp@latest", "--headless", "--browser", "chromium"]
+      "args": ["@playwright/mcp@latest", "--browser", "chrome"]
     }
   }
 }

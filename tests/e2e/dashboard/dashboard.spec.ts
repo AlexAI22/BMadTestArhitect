@@ -24,11 +24,25 @@ test.describe('Dashboard', () => {
     expect(await dashboardPage.getWelcomeText()).toBe('Dashboard');
   });
 
-  // P1 — Feature discoverability: primary navigation items are present.
+  // P1 — Feature discoverability: the full primary navigation is present.
+  // List verified against the live site (probe-live, 2026-06): 12 modules.
   test('primary navigation menu items are visible', async ({ authenticatedPage }) => {
     const dashboardPage = new DashboardPage(authenticatedPage);
 
-    const expectedItems = ['Admin', 'PIM', 'Leave', 'Time', 'Dashboard'];
+    const expectedItems = [
+      'Admin',
+      'PIM',
+      'Leave',
+      'Time',
+      'Recruitment',
+      'My Info',
+      'Performance',
+      'Dashboard',
+      'Directory',
+      'Maintenance',
+      'Claim',
+      'Buzz',
+    ];
 
     for (const item of expectedItems) {
       await expect(

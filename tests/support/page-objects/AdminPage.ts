@@ -102,4 +102,12 @@ export class AdminPage {
   cell(text: string): Locator {
     return this.resultsTable.getByText(text, { exact: true }).first();
   }
+
+  /**
+   * A results-grid column header by its visible name (role-based). Page-scoped
+   * because OrangeHRM renders the header row outside the role="table" element.
+   */
+  columnHeader(name: string): Locator {
+    return this.page.getByRole('columnheader', { name });
+  }
 }

@@ -27,6 +27,14 @@ test.describe('Admin — System Users', () => {
     await expect(admin.resultsTable, 'The results grid should be visible').toBeVisible();
     await expect(admin.recordsFound, 'A records-found summary should be shown').toBeVisible();
 
+    // Grid columns (verified against the live site).
+    for (const col of ['Username', 'User Role', 'Employee Name', 'Status', 'Actions']) {
+      await expect(
+        admin.columnHeader(col),
+        `The results grid should expose the "${col}" column`,
+      ).toBeVisible();
+    }
+
     expect(
       await admin.getRecordsCount(),
       'The unfiltered list should contain at least one user',
